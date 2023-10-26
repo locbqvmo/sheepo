@@ -1,3 +1,5 @@
-export enum API_PATH {
-  LOGIN = '/login',
-}
+export const API_PATH = {
+  AUTH: {
+    LOGIN: '/auth/login',
+  },
+};
