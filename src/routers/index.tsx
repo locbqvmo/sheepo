@@ -16,11 +16,15 @@ import {
   ProductsPage,
   UsersPage,
 } from '@/pages/cms';
+<<<<<<< HEAD
 import {
   CartPage as CartPageWeb,
   HomePage as HomePageWeb,
   ProductDetailPage as ProductDetailPageWeb,
 } from '@/pages/customer';
+=======
+import { Casual, HomePage as HomePageWeb } from '@/pages/customer';
+>>>>>>> 1d5f612 (feat/filter-product-user-web)
 
 export const Routers = createBrowserRouter(
   createRoutesFromElements(
@@ -69,6 +73,20 @@ export const Routers = createBrowserRouter(
             }}
           />
         </Route>
+      </Route>
+      <Route path="casual" element={<MainLayout />}>
+        <Route
+          index
+          element={<Casual />}
+          handle={{
+            crumb: () => {
+              return {
+                href: '/casual',
+                name: 'Casual',
+              };
+            },
+          }}
+        />
       </Route>
 
       {/** ROUTERS FOR CMS */}

@@ -18,4 +18,8 @@ export * from './Tabs';
 export * from './TabPanel';
 export * from './Rating';
 export * from './icons';
+<<<<<<< HEAD
 export * from './RadioButton';
+=======
+export * from './ColorPicker';
+>>>>>>> 1d5f612 (feat/filter-product-user-web)
