@@ -1,21 +1,28 @@
 import { Box, Divider } from '@mui/material';
 import { FilterCasual, FiterProductUserWeb } from './component';
+import { FilterProduct } from './component/FilterProduct';
+import { Collapse } from '@/components';
 
 export const Casual = () => {
   return (
     <>
-      <Box sx={{ display: 'flex', flexWrap:'nowrap' }}>
+      <Box>
         <Divider
           sx={{
-            background: 'rgba(0, 0, 0, 0.10)',
-            borderTop: '24px',
+            backgroundColor: 'rgba(0, 0, 0, 0.10)',
             mx: '100px',
-            my: '134px',
+            marginTop: '24px',
           }}
           variant="middle"
         />
-        <FiterProductUserWeb />
-        <FilterCasual />
+        <p style={{ marginTop: '24px', marginLeft: '175px' }}>Casual</p>
+        <Box sx={{ display: 'flex', flexWrap: 'nowrap' }}>
+          <FiterProductUserWeb />
+          <Box>
+            <FilterCasual />
+            <FilterProduct />
+          </Box>
+        </Box>
       </Box>
     </>
   );
