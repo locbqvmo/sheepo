@@ -1,49 +1,40 @@
-import { Box, Button } from '@mui/material';
-import { Container } from '@/components';
-import { CardProduct } from '@/components/CardProduct';
-import { LIST_CARD_PRODUCT } from '@/components/CardProduct/__mocks__/data';
-import { ProductCard } from '@/components/ProductCard';
-import { TitleSection } from '@/components/TitleSection';
+import React from 'react';
+import { Button, Divider, Grid, useMediaQuery, useTheme } from '@mui/material';
+import { CardProduct, Container, TitleSection } from '@/components';
+import Pagination from '@/components/Pagination/Pagination';
+import { LIST_PRODUCT_CASUAL } from './__mocks__/data';
 
 export const FilterProduct = () => {
   return (
     <Container>
-      <Box
+      {/* <TitleSection
+        name="NEW ARRIVALS"
+        className="mt-[72px] mb-[55px] flex justify-center items-center"
+      /> */}
+      <div
+        style={{ display: 'flex', flexWrap: 'wrap', marginRight:'21px' }}
+        className="grid sm:grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+        {LIST_PRODUCT_CASUAL.map((item, i) => (
+          <CardProduct key={i} {...item} />
+        ))}
+      </div>
+      <Divider
         sx={{
-          display: 'flex',
-          flexWrap: 'nowrap',
-          width: '925px',
-          height: '408px',
-        }}>
-        <Box
-          sx={{
-            marginLeft: '20px',
-            marginTop: '263px',
-            width: '1440px',
-            borderRadius: '20px',
-            gap: '20px',
-            display: 'flex',
-          }}>
-          <ProductCard
-            image="./image"
-            name="Gradient Graphic T-shirt"
-            star={5}
-            price="$250"
-          />
-          <ProductCard
-            image="./image"
-            name="Polo with Tipping Details"
-            star={5}
-            price="$250"
-          />
-          <ProductCard
-            image="./image"
-            name="Gradient Graphic T-shirt"
-            star={5}
-            price="$250"
-          />
-        </Box>
-      </Box>
+          backgroundColor: 'rgba(0, 0, 0, 0.10)',
+          mx: '100px',
+          marginTop: '30px',
+          marginBottom: '30px',
+        }}
+        variant="middle"
+      />
+      <Pagination
+        currentPage={10}
+        totalCount={20}
+        itemsPerPage={30}
+        onPageChange={function (page: {}): void {
+          throw new Error('Function not implemented.');
+        }}
+      />
     </Container>
   );
 };

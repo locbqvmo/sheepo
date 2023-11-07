@@ -1,6 +1,7 @@
 import React from 'react';
 import './style.css';
 import { Box } from '@mui/material';
+import { Swiper } from 'swiper/react';
 import { Button, Collapse, ColorPicker } from '@/components';
 import Pagination from '@/components/Pagination/Pagination';
 import { FilterProduct } from '../FilterProduct';
@@ -12,7 +13,6 @@ export const FilterCasual = () => {
         <p className="text" style={{ marginLeft: '20px', marginTop: '24px' }}>
           Casual
         </p>
-
         <Box
           sx={{
             display: 'flex',
