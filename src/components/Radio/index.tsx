@@ -1,37 +1,36 @@
 import * as React from 'react';
+import { ChangeHandler } from 'react-hook-form';
 import { RadioGroup } from '@mui/material';
 import Radio, { RadioProps } from '@mui/material/Radio';
 
-enum VariantRadio {
-  'rounded-contained' = 'rounded-contained',
-  'rounded-outlined' = 'rounded-outlined',
+export interface IValueRadio {
+  id: number;
+  name: string;
+}
+export interface RadioProp extends RadioProps {
+  values: IValueRadio[];
+  className?: string;
+  handleChange?: ChangeHandler;
+  defaultLabel?: string;
 }
 
-type IRadioProps = {
-  variant?: `${VariantRadio}`;
-} & Omit<RadioProps, 'variant'>;
-
 export const RadioButtons = ({
-  value,
-  variant = 'rounded-contained',
-  className,
+  values,
+  handleChange,
+  defaultLabel,
+  sx,
   ...props
-}: IRadioProps) => {
-  const [selectedValue, setSelectedValue] = React.useState(value);
-
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setSelectedValue(event.target.value);
-  };
-
+}: RadioProp) => {
+  const [selectedRadio, setSelectedRadio] = React.useState(values);
   return (
     <RadioGroup sx={{ display: 'flex', gap: 2 }}>
       <Radio
-        checked={selectedValue === value}
-        onChange={handleChange}
-        value={value}
+        onChange={() => setSelectedRadio(values)}
+        checked={selectedRadio === values}
+        value={values}
         name="radio-buttons"
+        sx={sx}
         {...props}
-        // slotProps={{ input: { 'aria-label': 'A' } }}
       />
     </RadioGroup>
   );

@@ -1,21 +1,38 @@
 import { Box, Divider } from '@mui/material';
+import clsx from 'classnames';
+import { Breadcrumbs } from '@/components';
+import Pagination from '@/components/Pagination/Pagination';
 import { FilterCasual, FiterProductUserWeb } from './component';
+import { FilterProduct } from './component/FilterProduct';
 
 export const Casual = () => {
   return (
     <>
-      <Box sx={{ display: 'flex', flexWrap:'nowrap' }}>
+      <Box
+        sx={{
+          width: ' 1440px',
+          height: '2332px',
+          alignItems: 'center',
+          mx: 'auto',
+        }}>
         <Divider
           sx={{
-            background: 'rgba(0, 0, 0, 0.10)',
-            borderTop: '24px',
+            backgroundColor: 'rgba(0, 0, 0, 0.10)',
             mx: '100px',
-            my: '134px',
+            marginTop: '24px',
           }}
           variant="middle"
         />
-        <FiterProductUserWeb />
-        <FilterCasual />
+        <Box sx={{ marginLeft: '100px', marginTop: '24px' }}>
+          <Breadcrumbs />
+        </Box>
+        <Box sx={{ display: 'flex', flexWrap: 'nowrap' }}>
+          <FiterProductUserWeb />
+          <Box>
+            <FilterCasual />
+            <FilterProduct />
+          </Box>
+        </Box>
       </Box>
     </>
   );

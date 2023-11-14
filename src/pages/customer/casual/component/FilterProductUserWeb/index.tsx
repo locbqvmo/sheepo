@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import './styles.css';
 import { Box, Divider } from '@mui/material';
-import { Button, Collapse, ColorPicker } from '@/components';
+import { Button, Collapse } from '@/components';
+import { ColorPicker } from '@/components/ColorPicker';
 import { RangeSlider } from '@/components/RangeSlider';
 import { ListSize } from './components/ListSize';
 import { ListStyle } from './components/ListStyle';
@@ -30,8 +31,8 @@ export const FiterProductUserWeb = () => {
       sx={{
         border: '1px solid rgba(0, 0, 0, 0.1)',
         borderRadius: '20px',
-        // mx: '100px',
-        // my: '204px',
+        marginLeft: '100px',
+        marginTop: '24px',
         width: '295px',
         height: '1220px',
         borderBottomWidth: '0px',

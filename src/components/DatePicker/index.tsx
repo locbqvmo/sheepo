@@ -1,24 +1,16 @@
-import * as React from 'react';
-import { ReactNode, useState } from 'react';
+import { SxProps } from '@mui/material';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 
 interface IDate {
-  children: ReactNode;
-  title: string;
-  className?: string;
+  label: string;
+  sx?: SxProps;
 }
-export const DatePickerComponent = ({ className, title, children }: IDate) => {
+export const DatePickers = ({ label, sx }: IDate) => {
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
-      <DemoContainer components={['DatePicker']}>
-        <DatePicker
-          sx={{ border: 'none', '& .MuiInputBase-root': { border: 'none' } }}
-          label="MM/DD/YYYY"
-        />
-      </DemoContainer>
+      <DatePicker label={label} sx={sx} />
     </LocalizationProvider>
   );
 };

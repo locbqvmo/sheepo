@@ -1,16 +1,10 @@
-import { Dispatch, SetStateAction, useState } from 'react';
+import { useState } from 'react';
 import { Box } from '@mui/material';
-
-interface ColorPickerProps {
-  colorList: string[];
-
-}
 export const ColorPicker = ({
-  colorList,
-  setBackgroundColor,
+  colorList, // setSelectColor,
 }: {
   colorList: string[];
-  setBackgroundColor: Dispatch<SetStateAction<string>>;
+  // setSelectColor: Dispatch<SetStateAction<string>>;
 }) => {
   const [color, setColor] = useState<string>();
   return (
@@ -58,7 +52,7 @@ export const ColorPicker = ({
               }
               onClick={() => {
                 setColor(item);
-                setBackgroundColor(item);
+                // setSelectColor(item);
               }}></Box>
           ))}
         </Box>

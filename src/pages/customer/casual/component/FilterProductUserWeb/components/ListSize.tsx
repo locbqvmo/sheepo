@@ -26,7 +26,6 @@ export const ListSize = () => {
         padding: '10px 20px',
         justifycontent: 'center',
         gap: '12px',
-        //backgroundColor: 'rgba(240, 240, 240, 1)',
       }}>
       {labelSizeList.map((data, index) => (
         <Chip

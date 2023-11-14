@@ -16,15 +16,9 @@ import {
   ProductsPage,
   UsersPage,
 } from '@/pages/cms';
-<<<<<<< HEAD
-import {
-  CartPage as CartPageWeb,
-  HomePage as HomePageWeb,
-  ProductDetailPage as ProductDetailPageWeb,
-} from '@/pages/customer';
-=======
-import { Casual, HomePage as HomePageWeb } from '@/pages/customer';
->>>>>>> 1d5f612 (feat/filter-product-user-web)
+import { CartPage as CartPageWeb, ProductDetailPage } from '@/pages/customer';
+import { HomePage as HomePageWeb } from '@/pages/customer';
+import { Casual } from '@/pages/customer/casual';
 
 export const Routers = createBrowserRouter(
   createRoutesFromElements(
@@ -45,7 +39,7 @@ export const Routers = createBrowserRouter(
         />
         <Route
           path="products/:productId"
-          element={<ProductDetailPageWeb />}
+          element={<ProductDetailPage />}
           handle={{
             crumb: () => ({
               href: 'products',
@@ -73,20 +67,28 @@ export const Routers = createBrowserRouter(
             }}
           />
         </Route>
-      </Route>
-      <Route path="casual" element={<MainLayout />}>
         <Route
-          index
-          element={<Casual />}
           handle={{
             crumb: () => {
               return {
-                href: '/casual',
-                name: 'Casual',
+                href: '/',
+                name: 'Home',
               };
             },
-          }}
-        />
+          }}>
+          <Route
+            path="casual"
+            element={<Casual />}
+            handle={{
+              crumb: () => {
+                return {
+                  href: '/casual',
+                  name: 'Casual',
+                };
+              },
+            }}
+          />
+        </Route>
       </Route>
 
       {/** ROUTERS FOR CMS */}
