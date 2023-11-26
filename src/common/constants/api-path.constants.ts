@@ -5,4 +5,5 @@ export enum API_PATH {
   CATEGORY = '/category',
   ATTRIBUTE = '/attribute',
   PRODUCT = '/product',
+  USER = '/user',
 }

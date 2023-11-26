@@ -12,6 +12,7 @@ import {
   cartReducer,
   categoryReducer,
   modalReducer,
+  userReducer,
 } from '../slices';
 
 const middleware = [] as any[];
@@ -22,6 +23,7 @@ const allReducer = combineReducers({
   category: categoryReducer,
   attribute: attributeReducer,
   cart: cartReducer,
+  user: userReducer,
 });
 
 const persistConfig = {
