@@ -69,7 +69,7 @@ const authSlice = createSlice({
   initialState,
   reducers: {
     logout(state: IAuthState) {
-      state.accessToken = undefined;
+      return { ...state, accessToken: undefined };
     },
     logoutCms(state: IAuthState) {
       state.accessTokenCms = undefined;
