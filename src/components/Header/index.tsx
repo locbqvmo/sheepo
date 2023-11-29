@@ -1,10 +1,14 @@
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import { useMediaQuery } from '@mui/material';
-import { Container, Input } from '@/components';
+import { Container, Dropdown, Input } from '@/components';
 import { useToggle } from '@/hooks/useToggle';
+import { logout } from '@/redux/slices';
+import { store } from '@/redux/store';
+import { ModalServices } from '@/services/modal-service';
 import { Drawer } from '../Drawer';
 import { CloseIcon, SearchIcon } from '../icons';
 // import { MenuMobileIcon } from '../icons/MenuMobileIcon';
@@ -23,6 +27,28 @@ export const Header = () => {
     }
     setSearch('');
   };
+
+  const authLogin = store.getState()?.auth?.accessToken;
+  const dispatch = useDispatch();
+
+  const loginOption = {
+    label: 'Log In',
+    action: () => navigate('/login'),
+  };
+
+  const logoutOption = {
+    label: 'Log Out',
+    action: () => {
+      const pathname = window.location.pathname;
+      dispatch(logout());
+      navigate(pathname);
+      ModalServices.showMessageSuccess({
+        message: 'Logout successfully',
+      });
+    },
+  };
+
+  const options = !authLogin ? [loginOption] : [logoutOption];
 
   return (
     <>
@@ -71,14 +97,18 @@ export const Header = () => {
               disableErrorMessage
             />
           </div>
-          <div className="flex">
+          <div className="flex justify-center items-center">
             <div className="flex justify-center items-center text-black mr-3 lg:hidden">
               <SearchIcon fillOpacity={1} />
             </div>
             <p onClick={() => navigate('/cart')}>
               <ShoppingCartOutlinedIcon className="mr-3 cursor-pointer" />
             </p>
-            <AccountCircleOutlinedIcon />
+            <Dropdown
+              renderLabel={<AccountCircleOutlinedIcon />}
+              options={options}
+              containerClass="my-dropdown-container"
+            />
           </div>
         </div>
       </Container>
