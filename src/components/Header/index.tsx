@@ -39,8 +39,7 @@ export const Header = () => {
   const logoutOption = {
     label: 'Log Out',
     action: () => {
-      const currentURL = window.location.href;
-      const pathname = currentURL.lastIndexOf('/');
+      const pathname = window.location.pathname;
       dispatch(logout());
       navigate(pathname);
       ModalServices.showMessageSuccess({
