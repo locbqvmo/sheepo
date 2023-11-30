@@ -1,10 +1,21 @@
 import { useState } from 'react';
+import React from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import {
+  ArrowLeftOnRectangleIcon,
+  ArrowRightOnRectangleIcon,
+} from '@heroicons/react/24/outline';
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
-import { useMediaQuery } from '@mui/material';
-import { Container, Dropdown, Input } from '@/components';
+import {
+  IconButton,
+  Menu,
+  MenuItem,
+  Typography,
+  useMediaQuery,
+} from '@mui/material';
+import { Container, Input } from '@/components';
 import { useToggle } from '@/hooks/useToggle';
 import { logout } from '@/redux/slices';
 import { store } from '@/redux/store';
@@ -18,8 +29,19 @@ export const Header = () => {
   const [open, toggle] = useToggle();
   const [search, setSearch] = useState('');
   const isSupperSmallScreen = useMediaQuery('(max-width: 320px)');
+  const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(
+    null,
+  );
   const navigate = useNavigate();
   const [, setOpenMenu] = useState<boolean>(false);
+
+  const handleCloseUserMenu = () => {
+    setAnchorElUser(null);
+  };
+
+  const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorElUser(event.currentTarget);
+  };
 
   const handleClearSearch = () => {
     if (!search) {
@@ -31,24 +53,16 @@ export const Header = () => {
   const authLogin = store.getState()?.auth?.accessToken;
   const dispatch = useDispatch();
 
-  const loginOption = {
-    label: 'Log In',
-    action: () => navigate('/login'),
-  };
+  const handleLogin = () => navigate('/login');
 
-  const logoutOption = {
-    label: 'Log Out',
-    action: () => {
-      const pathname = window.location.pathname;
-      dispatch(logout());
-      navigate(pathname);
-      ModalServices.showMessageSuccess({
-        message: 'Logout successfully',
-      });
-    },
+  const handleLogout = () => {
+    const pathname = window.location.pathname;
+    dispatch(logout());
+    navigate(pathname);
+    ModalServices.showMessageSuccess({
+      message: 'Logout successfully',
+    });
   };
-
-  const options = !authLogin ? [loginOption] : [logoutOption];
 
   return (
     <>
@@ -104,11 +118,41 @@ export const Header = () => {
             <p onClick={() => navigate('/cart')}>
               <ShoppingCartOutlinedIcon className="mr-3 cursor-pointer" />
             </p>
-            <Dropdown
-              renderLabel={<AccountCircleOutlinedIcon />}
-              options={options}
-              containerClass="my-dropdown-container"
-            />
+            <IconButton onClick={handleOpenUserMenu}>
+              <AccountCircleOutlinedIcon />
+            </IconButton>
+
+            <Menu
+              sx={{ mt: '45px' }}
+              id="menu-appbar"
+              anchorEl={anchorElUser}
+              anchorOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+              }}
+              keepMounted
+              transformOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+              }}
+              open={Boolean(anchorElUser)}
+              onClose={handleCloseUserMenu}>
+              {!authLogin ? (
+                <MenuItem onClick={handleLogin}>
+                  <ArrowLeftOnRectangleIcon height={20} width={20} />
+                  <Typography marginLeft={1} textAlign="center">
+                    Log In
+                  </Typography>
+                </MenuItem>
+              ) : (
+                <MenuItem onClick={handleLogout}>
+                  <ArrowRightOnRectangleIcon height={20} width={20} />
+                  <Typography marginLeft={1} textAlign="center">
+                    Log Out
+                  </Typography>
+                </MenuItem>
+              )}
+            </Menu>
           </div>
         </div>
       </Container>
